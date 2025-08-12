@@ -1,0 +1,69 @@
+import java.util.Scanner;
+
+// Superclasse
+class Funcionario {
+    String nome;
+
+    public void trabalhar() {
+        System.out.println(nome + " está trabalhando.");
+    }
+}
+
+// Subclasse Gerente
+class Gerente extends Funcionario {
+    public void aprovarFerias() {
+        System.out.println(nome + " aprovou as férias.");
+    }
+}
+
+// Subclasse Desenvolvedor
+class Desenvolvedor extends Funcionario {
+    public void programar() {
+        System.out.println(nome + " está programando.");
+    }
+}
+
+// Classe principal
+public class SistemaRH {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite o nome do funcionário: ");
+        String nome = scanner.nextLine();
+
+        System.out.print("Digite o cargo (gerente, desenvolvedor): ");
+        String cargo = scanner.nextLine();
+
+        Funcionario funcionario = null;
+
+        // Usando switch-case para criar o tipo certo de funcionário
+        switch (cargo.toLowerCase()) {
+            case "gerente":
+                funcionario = new Gerente();
+                funcionario.nome = nome;
+                break;
+
+            case "desenvolvedor":
+                funcionario = new Desenvolvedor();
+                funcionario.nome = nome;
+                break;
+
+            default:
+                System.out.println("Cargo inválido!");
+                scanner.close();
+                return;
+        }
+
+        // Ação genérica
+        funcionario.trabalhar();
+
+        // Casting com instanceof para ação específica
+        if (funcionario instanceof Gerente) {
+            ((Gerente) funcionario).aprovarFerias();
+        } else if (funcionario instanceof Desenvolvedor) {
+            ((Desenvolvedor) funcionario).programar();
+        }
+
+        scanner.close();
+    }
+}
