@@ -16,7 +16,7 @@ public class ConexaoMySQL {
             p.load(in);
             return p;
         } catch (IOException e) {
-            throw new RuntimeException("Erro ao carregar db.properties: " + e.getMessage(), e);
+            throw new RuntimeException("Erro ao carregar db.properties: " + e.getMessage(), e); //Captura problemas de arquivo e configuração e retorna mensagens.
         }
     }
 
