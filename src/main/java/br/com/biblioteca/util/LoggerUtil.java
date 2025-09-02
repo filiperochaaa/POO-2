@@ -24,7 +24,7 @@ public class LoggerUtil {
                 logger.addHandler(fileHandler);
                 logger.setUseParentHandlers(true);
             } catch (IOException e) {
-                System.err.println("Falha ao iniciar logger: " + e.getMessage());
+                System.err.println("Falha ao iniciar logger: " + e.getMessage()); //O código trata exceções de entrada, banco de dados, configuração e validação e mantém os logs.
             }
         }
         return logger;
