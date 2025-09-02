@@ -33,7 +33,7 @@ public class Principal {
                 }
             } catch (Exception e) {
                 System.out.println("Ocorreu um erro: " + e.getMessage());
-                LoggerUtil.error("Erro na operação do menu", e);
+                LoggerUtil.error("Erro na operação do menu", e); //Garante que o programa não quebre e registra no log.
             }
         } while (opcao != 0);
     }
@@ -119,7 +119,7 @@ public class Principal {
         List<Livro> resultado = switch (op) {
             case 1 -> dao.findByTitulo(termo);
             case 2 -> dao.findByAutor(termo);
-            default -> List.of();
+            default -> List.of();  //usa o método de fábrica imutável de Collections
         };
         if (resultado.isEmpty()) {
             System.out.println("Nenhum registro encontrado.");
@@ -137,7 +137,7 @@ public class Principal {
                 String linha = sc.nextLine();
                 return Integer.parseInt(linha.trim());
             } catch (NumberFormatException e) {
-                System.out.println("Valor inválido. Digite um número inteiro.");
+                System.out.println("Valor inválido. Digite um número inteiro."); //O usuário é avisado sobre a entrada invalida de numeros e pode tentar novamente.
             }
         }
     }
@@ -162,7 +162,7 @@ public class Principal {
             try {
                 Validador.exigirNaoVazio(v, nomeCampo);
                 return v.trim();
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) { //Usa exceção IllegalArgumentException para evitar cadastros inconsistentes.
                 System.out.println(e.getMessage());
             }
         }
