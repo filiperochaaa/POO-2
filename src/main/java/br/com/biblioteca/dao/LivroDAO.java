@@ -33,7 +33,7 @@ public class LivroDAO {
 
     public List<Livro> findAll() throws SQLException {
         String sql = "SELECT id, titulo, autor, anoPublicacao, editora, isbn FROM livros ORDER BY id";
-        List<Livro> lista = new ArrayList<>();
+        List<Livro> lista = new ArrayList<>(); //Aqui é usada a List<Livro> (interface) e a implementação ArrayList.
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -56,7 +56,7 @@ public class LivroDAO {
         return null;
     }
 
-    public List<Livro> findByTitulo(String termo) throws SQLException {
+    public List<Livro> findByTitulo(String termo) throws SQLException { //implementação de araylist
         String sql = "SELECT id, titulo, autor, anoPublicacao, editora, isbn FROM livros WHERE titulo LIKE ? ORDER BY titulo";
         List<Livro> lista = new ArrayList<>();
         try (Connection conn = getConnection();
@@ -69,7 +69,7 @@ public class LivroDAO {
         return lista;
     }
 
-    public List<Livro> findByAutor(String termo) throws SQLException {
+    public List<Livro> findByAutor(String termo) throws SQLException { //implementação de araylist
         String sql = "SELECT id, titulo, autor, anoPublicacao, editora, isbn FROM livros WHERE autor LIKE ? ORDER BY autor";
         List<Livro> lista = new ArrayList<>();
         try (Connection conn = getConnection();
