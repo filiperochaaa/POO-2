@@ -1,0 +1,112 @@
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+public class CadastroUsuario {
+    private String nome;
+    private String senha;
+    private String cpf;
+
+    // Construtor
+    public CadastroUsuario(String nome, String senha, String cpf) {
+        this.nome = nome;
+        this.senha = senha;
+        this.cpf = cpf;
+    }
+
+    // Método que centraliza todas as validações
+    public boolean validar() {
+        return validarNome() && validarSenha() && validarCPF();
+    }
+
+    // Valida se o nome não é vazio
+    public boolean validarNome() {
+        boolean valido = nome != null && !nome.trim().isEmpty();
+        if (!valido) {
+            System.out.println("Erro: Nome não pode estar vazio");
+        }
+        return valido;
+    }
+
+    // Valida se a senha tem mínimo 8 caracteres e contém letra e número
+    public boolean validarSenha() {
+        if (senha == null || senha.length() < 8) {
+            System.out.println("Erro: Senha deve ter no mínimo 8 caracteres");
+            return false;
+        }
+        
+        boolean temLetra = false;
+        boolean temNumero = false;
+        
+        for (char c : senha.toCharArray()) {
+            if (Character.isLetter(c)) {
+                temLetra = true;
+            } else if (Character.isDigit(c)) {
+                temNumero = true;
+            }
+        }
+        
+        boolean valido = temLetra && temNumero;
+        if (!valido) {
+            System.out.println("Erro: Senha deve conter pelo menos uma letra e um número");
+        }
+        return valido;
+    }
+
+    // Valida se o CPF tem 11 dígitos e contém apenas números
+    public boolean validarCPF() {
+        if (cpf == null) {
+            System.out.println("Erro: CPF não pode ser nulo");
+            return false;
+        }
+        
+        // Remove espaços em branco e verifica se tem apenas números
+        String cpfLimpo = cpf.trim();
+        boolean valido = cpfLimpo.matches("\\d{11}");
+        
+        if (!valido) {
+            System.out.println("Erro: CPF deve conter exatamente 11 dígitos numéricos");
+        }
+        return valido;
+    }
+
+    // Método para exibir informações do usuário (apenas para teste)
+    public void exibirInformacoes() {
+        System.out.println("Nome: " + nome);
+        System.out.println("Senha: " + (senha != null ? "*".repeat(senha.length()) : "null"));
+        System.out.println("CPF: " + cpf);
+        System.out.println("Válido: " + validar());
+        System.out.println("---");
+    }
+
+    public static void main(String[] args) {
+        // Criando 3 objetos: 1 válido e 2 inválidos
+        System.out.println("=== TESTE DE VALIDAÇÃO DE USUÁRIOS ===\n");
+
+        // Usuário 1 - VÁLIDO
+        System.out.println("Usuário 1 (Válido):");
+        CadastroUsuario usuario1 = new CadastroUsuario("João Silva", "senha123", "12345678901");
+        usuario1.exibirInformacoes();
+
+        // Usuário 2 - INVÁLIDO (nome vazio)
+        System.out.println("Usuário 2 (Inválido - nome vazio):");
+        CadastroUsuario usuario2 = new CadastroUsuario("", "senha123", "12345678901");
+        usuario2.exibirInformacoes();
+
+        // Usuário 3 - INVÁLIDO (senha fraca e CPF inválido)
+        System.out.println("Usuário 3 (Inválido - senha fraca e CPF inválido):");
+        CadastroUsuario usuario3 = new CadastroUsuario("Maria Santos", "abc", "123abc45678");
+        usuario3.exibirInformacoes();
+
+        // Teste adicional - Usuário 4 - INVÁLIDO (senha sem números)
+        System.out.println("Usuário 4 (Inválido - senha sem números):");
+        CadastroUsuario usuario4 = new CadastroUsuario("Pedro Oliveira", "senhaforte", "98765432100");
+        usuario4.exibirInformacoes();
+
+        // Resumo das validações
+        System.out.println("=== RESUMO DAS VALIDAÇÕES ===");
+        System.out.println("Usuário 1 válido: " + usuario1.validar());
+        System.out.println("Usuário 2 válido: " + usuario2.validar());
+        System.out.println("Usuário 3 válido: " + usuario3.validar());
+        System.out.println("Usuário 4 válido: " + usuario4.validar());
+    }
+}
