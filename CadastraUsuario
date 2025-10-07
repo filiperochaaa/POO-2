@@ -69,44 +69,31 @@ public class CadastroUsuario {
         return valido;
     }
 
-    // Método para exibir informações do usuário (apenas para teste)
+    // Getters para acessar os dados (útil para exibição)
+    public String getNome() {
+        return nome;
+    }
+
+    public String getSenhaMascarada() {
+        return senha != null ? "*".repeat(senha.length()) : "null";
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    // Método para exibir informações do usuário
     public void exibirInformacoes() {
         System.out.println("Nome: " + nome);
-        System.out.println("Senha: " + (senha != null ? "*".repeat(senha.length()) : "null"));
+        System.out.println("Senha: " + getSenhaMascarada());
         System.out.println("CPF: " + cpf);
         System.out.println("Válido: " + validar());
         System.out.println("---");
     }
 
     public static void main(String[] args) {
-        // Criando 3 objetos: 1 válido e 2 inválidos
-        System.out.println("=== TESTE DE VALIDAÇÃO DE USUÁRIOS ===\n");
-
-        // Usuário 1 - VÁLIDO
-        System.out.println("Usuário 1 (Válido):");
-        CadastroUsuario usuario1 = new CadastroUsuario("João Silva", "senha123", "12345678901");
-        usuario1.exibirInformacoes();
-
-        // Usuário 2 - INVÁLIDO (nome vazio)
-        System.out.println("Usuário 2 (Inválido - nome vazio):");
-        CadastroUsuario usuario2 = new CadastroUsuario("", "senha123", "12345678901");
-        usuario2.exibirInformacoes();
-
-        // Usuário 3 - INVÁLIDO (senha fraca e CPF inválido)
-        System.out.println("Usuário 3 (Inválido - senha fraca e CPF inválido):");
-        CadastroUsuario usuario3 = new CadastroUsuario("Maria Santos", "abc", "123abc45678");
-        usuario3.exibirInformacoes();
-
-        // Teste adicional - Usuário 4 - INVÁLIDO (senha sem números)
-        System.out.println("Usuário 4 (Inválido - senha sem números):");
-        CadastroUsuario usuario4 = new CadastroUsuario("Pedro Oliveira", "senhaforte", "98765432100");
-        usuario4.exibirInformacoes();
-
-        // Resumo das validações
-        System.out.println("=== RESUMO DAS VALIDAÇÕES ===");
-        System.out.println("Usuário 1 válido: " + usuario1.validar());
-        System.out.println("Usuário 2 válido: " + usuario2.validar());
-        System.out.println("Usuário 3 válido: " + usuario3.validar());
-        System.out.println("Usuário 4 válido: " + usuario4.validar());
+        // Método main vazio para você testar conforme necessário
+        System.out.println("Classe CadastroUsuario pronta para uso!");
+        System.out.println("Crie objetos e chame o método validar() para testar.");
     }
 }
